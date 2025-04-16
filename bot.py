@@ -26,21 +26,23 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": """
-Analiza el ticket de retiro de efectivo que te mostraré a continuación y responde **solo en este formato exacto**:
+Te voy a mandar una fotografia
+Considera darle un formato llamativo entendible y formal y para visualizacion en telegram.
+Tú solo vas a responder con la siguiente ficha analizando los datos de la imagen:
 
-RETIRO DE EFECTIVO
+RETIRO DE EFECTIVO 
 
-- FECHA:
-- HORA:
-- ANFITRIÓN:
-- PARCIAL NÚMERO:
-- EFECTIVO MXN:
-- BILLETES AGREGADOS:
-  - BILLETES DE 500:
-    - NUMEROS DE SERIE:
-  - BILLETES DE 1000:
-    - NUMEROS DE SERIE:
-  - 
+FECHA:
+HORA:
+ANFITRION:
+PARCIAL NUMERO:
+EFECTIVO MXN:
+BILLETES AGREGADOS:
+	- BILLETES DE 500:
+	- NUMEROS DE SERIE:
+
+	- BILLETES DE 1000
+	- NUMEROS DE SERIE:
 
 No incluyas ninguna explicación ni texto adicional. Si un dato no se encuentra visible, indícalo como \"No visible\".
 """},
