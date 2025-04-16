@@ -10,7 +10,7 @@ from dotenv import load_dotenv
 load_dotenv()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GRUPO_CHAT_ID = "-4761998709"
+GRUPO_CHAT_ID = int(os.getenv("GRUPO_CHAT_ID"))  # Asegúrate de agregar esto en tu .env
 
 openai.api_key = OPENAI_API_KEY
 
