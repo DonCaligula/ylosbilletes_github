@@ -37,7 +37,10 @@ RETIRO DE EFECTIVO
 - EFECTIVO MXN:
 - BILLETES AGREGADOS:
   - BILLETES DE 500:
+    - NUMEROS DE SERIE:
   - BILLETES DE 1000:
+    - NUMEROS DE SERIE:
+  - 
 
 No incluyas ninguna explicación ni texto adicional. Si un dato no se encuentra visible, indícalo como \"No visible\".
 """},
