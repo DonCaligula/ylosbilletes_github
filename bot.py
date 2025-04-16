@@ -59,7 +59,8 @@ Asegúrate de ser exacto, sin explicaciones ni frases adicionales. No inventes d
         # Enviar imagen original al grupo con análisis como caption
         await context.bot.send_photo(
             chat_id=GRUPO_CHAT_ID,
-            photo=image_bytes,
+            photo=BytesIO(image_bytes),
+            filename="ticket.jpg",
             caption=result
         )
 
