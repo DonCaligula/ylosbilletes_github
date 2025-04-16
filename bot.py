@@ -21,30 +21,27 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
     image_data_url = f"data:image/jpeg;base64,{image_base64}"
 
     try:
-        # Llamada a GPT-4o con un prompt personalizado y formato fijo
+        # Llamada a GPT-4o con un prompt detallado y formato estricto
         response = openai.chat.completions.create(
             model="gpt-4o",
             messages=[
                 {"role": "system", "content": """
-Te voy a mandar una fotografia
-Considera darle un formato llamativo entendible y formal y para visualizacion en telegram.
-Tú solo vas a responder con la siguiente ficha analizando los datos de la imagen:
+Analiza cuidadosamente el contenido del ticket de retiro de efectivo y los billetes visibles en la imagen proporcionada. Extrae los datos con precisión y responde solo en el siguiente formato estandarizado y claro:
 
-RETIRO DE EFECTIVO 
+RETIRO DE EFECTIVO
 
-FECHA:
-HORA:
-ANFITRION:
-PARCIAL NUMERO:
-EFECTIVO MXN:
-BILLETES AGREGADOS:
-	- BILLETES DE 500:
-	- NUMEROS DE SERIE:
+- FECHA: (formato YYYY-MM-DD)
+- HORA: (formato HH:MM:SS)
+- ANFITRIÓN: (nombre completo visible o "No visible")
+- PARCIAL NÚMERO: (número visible o "No visible")
+- EFECTIVO MXN: (monto total extraído, ejemplo: $2000.00)
+- BILLETES AGREGADOS:
+  - BILLETES DE 500: (cantidad si es visible o "No visible")
+  - BILLETES DE 1000: (cantidad si es visible o "No visible")
+- NÚMEROS DE SERIE DETECTADOS:
+  - (Escribe cada número de serie visible en los billetes, uno por línea. Si no hay ninguno legible, escribe "No visibles")
 
-	- BILLETES DE 1000
-	- NUMEROS DE SERIE:
-
-No incluyas ninguna explicación ni texto adicional. Si un dato no se encuentra visible, indícalo como \"No visible\".
+Asegúrate de ser exacto, sin explicaciones ni frases adicionales. No inventes datos. Si un campo no es claramente legible, indica "No visible".
 """},
                 {"role": "user", "content": [
                     {"type": "image_url", "image_url": {"url": image_data_url}}
@@ -59,7 +56,7 @@ No incluyas ninguna explicación ni texto adicional. Si un dato no se encuentra 
         await update.message.reply_text(f"Error: {str(e)}")
 
 # Inicialización y ejecución del bot de Telegram
-if __name__ == '__main__':
+if name == '__main__':
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.run_polling()
