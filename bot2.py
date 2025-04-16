@@ -56,7 +56,7 @@ Asegúrate de ser exacto, sin explicaciones ni frases adicionales. No inventes d
         await update.message.reply_text(f"Error: {str(e)}")
 
 # Inicialización y ejecución del bot de Telegram
-if name == '__main__':
+if __name__ == '__main__':
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.run_polling()
