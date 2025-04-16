@@ -10,8 +10,6 @@ from dotenv import load_dotenv
 load_dotenv()
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-GRUPO_CHAT_ID = int(os.getenv("GRUPO_CHAT_ID"))  # Asegúrate de agregar esto en tu .env
-
 openai.api_key = OPENAI_API_KEY
 
 # Función principal para procesar la imagen
@@ -52,23 +50,13 @@ Asegúrate de ser exacto, sin explicaciones ni frases adicionales. No inventes d
         )
 
         result = response.choices[0].message.content
-
-        # Responder al usuario
-        await update.message.reply_text("✅ Análisis procesado. Enviando al grupo...")
-
-        # Enviar imagen original al grupo con análisis como caption
-        await context.bot.send_photo(
-            chat_id=GRUPO_CHAT_ID,
-            photo=BytesIO(image_bytes),
-            filename="ticket.jpg",
-            caption=result
-        )
+        await update.message.reply_text(result)
 
     except Exception as e:
         await update.message.reply_text(f"Error: {str(e)}")
 
 # Inicialización y ejecución del bot de Telegram
-if __name__ == '__main__':
+if name == '__main__':
     app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.run_polling()
